@@ -1,10 +1,10 @@
 trigger RFIDReadings on RFIDReading__e (after insert) {
-    Set<String> tagIds = new Set<String>();
+    Set<String> skus = new Set<String>();
     for(RFIDReading__e reading : Trigger.new) {
-        tagIds.add(reading.TagId__c);
+        skus.add(reading.SKU__c);
     }
 
-    List<ccrz__E_Product__c> matchingProducts = [SELECT Id FROM ccrz__E_Product__c WHERE ccrz__SKU__c IN :tagIds];
+    List<ccrz__E_Product__c> matchingProducts = [SELECT Id FROM ccrz__E_Product__c WHERE ccrz__SKU__c IN :skus];
 
     ccrz__E_Cart__c cart = [SELECT Id FROM ccrz__E_Cart__c WHERE ccrz__EncryptedId__c = '9251a8c2-a8cb-45e3-8cd9-141933829ead'];
 

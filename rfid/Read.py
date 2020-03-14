@@ -13,12 +13,14 @@ try:
     while True:
         option = int(input('1. write\n2. read\n'))
         if option == 1:
-            sku = input('SKU')
+            sku = input('Enter SKU: ')
             reader.write(sku)
             print('SKU assigned')
         else:
             id, sku = reader.read()
+            print('Tag read: ' + id + ' ' + sku)
             event = sf.RFIDReading__e.create({'TagId__c':id,'SKU__c':sku.strip()})
+            print('Event sent ' + event)
         sleep(2)
 except KeyboardInterrupt:
     GPIO.cleanup()
