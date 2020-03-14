@@ -18,9 +18,12 @@ try:
             print('SKU assigned')
         else:
             id, sku = reader.read()
-            print('Tag read: ' + id + ' ' + sku)
+            print('Tag read')
+            print(id)
+            print(sku)
             event = sf.RFIDReading__e.create({'TagId__c':id,'SKU__c':sku.strip()})
-            print('Event sent ' + event)
+            print('Event sent')
+            print(event)
         sleep(2)
 except KeyboardInterrupt:
     GPIO.cleanup()
